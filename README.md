@@ -1,105 +1,61 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# Mouse Logger
 
----
+## Preface
 
-# svelte app
+I have been thinking long, long time about a contest logger running in browser.
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+Advantages for users:
+- universal runtime, available on on hardware and OS platforms
+- this universal runtime is very unlikely to go away, at the same time being carefully maintained and developed
+- no need to update application: the current version can be automatically loaded from the repository server
+- application in browser can easily load various resources and/or data needed for configuration, information or assistance to the operator
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+Advantages for the developer (i.e. yours sincerely):
+- Very easy to develop user interface, using HTML and CSS
+  - for instance, all UI elements size and align themselves automatically, contrary to what we see in many applications developed in Pascal, C, C++ and many other programming languages, in which GUI was not the primary goal.
+  - styling is very easy, flexible thanks to CSS
+  - GUI changes in the application can be easily controlled via DOM properties
+- Javascript, although it is maybe not the most orthogonal or orthodox programming language in the world of mathematics, is likely the best in integrating GUI and the program code
+- Last but not least, running a javascript program in browser provides an easy way to reach various internet resources using the built-in functionality.
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+In other words, what could be easier than this!
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+I originally called this project "Log73" because there are so many loggers with so many names... However, after I developed a study of sending CW from browser via keyer connected to serial port, I realized, that so many things can be done by just clicking the mouse... Including, for instance, editing of contest memory texts - which is usually the most horrible and most tedious task in many contest loggers. So, based on this experience, I decided that "Mouse Logger" would actually be more apt.
 
+## Current features
 
-## Get started
+### UTC clock
 
-Install the dependencies...
+Window header displays UTC time based on your computer clock. This time will also be used to log QSO times, check contest periods, etc. Make sure your local clock is accurately synchronized and set to the correct time zone. So far there is no manual or automatic clock adjustment implemented.
 
-```bash
-cd svelte-app
-npm install
-```
+### Station Data
 
-...then start [Rollup](https://rollupjs.org):
+Basic station data are edited by clicking edit icon in the header. You can enter callsign, WW locator, name, QTH. More detailed operator or station data are not included and will not be included in the nearest future.
+These data are persisted - when you relaod the application page, they will be automatically retrieved. Data are saved automatically every time you change them.
 
-```bash
-npm run dev
-```
+## Planned features
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+1. Single-page application running entirely in the browser, with the application files served either from internet repository or from a tiny local server (the application does not need any server to run, the server is only needed to load everything into the browser).
+2. All data stored locally. This is similar to using a small database (for instance SQLite), but the difference is that you don't have to keep extra data files and take care that they not be corrupted or deleted.
+3. Of course, although the data will be "encapsulated" in the browser, it will be possible to download your logs from the browser to local file (ADIF or JSON, or perhaps some variant of the CSV logs) as well as upload you carefully kept ADIF files and store them in the browser.
+4. Basic contest operation - logging contacts with all the necessary information.
+5. Exporting contest log (see point 3). Where there will be a standard upload interface, it will be possible to upload the log directly to contest organizer's collection service (website). That means, you won't have to export (save) Cabrillo, then go to the contest website and upload the log manually - you will just fill your contest data (probably just category, since everything else is already stored in the brower) and click a button - if the contest organizer will provide convenient API.
+6. Log management - logs from different contests, expeditions or just casual logging, stored nicely in one database.
+7. Thanks to the initiative of Google, there is a serial port API available in Chrome. I already successfully tested that it is possible to send text from a browser app via keyer (it was Spider Keyer), so for those using Chrome this feature will be integrated in the first versions. Each keyer protocol will require respective driver to be included in the logger code, but in principle this logger can do the same as other loggers regarding keying. However, in the first generation, there will be no SO2R. Just one keyer talking to one rig.
+8.Situation regarding  rig control is even better. Two frequently used rig control programs, rigctld (hamlib) and FLRIG use network interface to communicate with other prorgrams. The first will probably be FLRIG because it uses HTTP protocol, so it should be possible to use it with any browser.
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+## History of development
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
+Being a "lonely" hobby developer, I was always looking for the easiest way out.  Therefore history of this application is marked by several attempts at doing the same using different tools and frameworks popular in their time.
 
-## Building and running in production mode
+The first idea was to use Bootstrap and jQuery. I can't recall the year, but it was at least ten years ago. It kind of worked, but handling the data eventually became a nightmare. At that time, I think the only possibility to persist the data was localStorage. Even with the use of JSON.stringify and JSON.parse it was difficult to imagine one could effciently handle large collections of data, hundreds of contacts in a contest, and possibly dozens of contests every year. Last but not least, if I remember, I had difficulty getting data from the internet because of the cross-site restrictions.
 
-To create an optimised version of the app:
+The second try was using Angular. For sake of accuracy, I must say it was Angular 1. In presentations and conference speaches it looked wonderful, tutorials and example apps were also appealing. As in the previous story, with the increasing complexity this task has quickly grown to a proportion not manageable by a single person.
 
-```bash
-npm run build
-```
+Angular 2 and later finally buried any hopes this would be the way go. After I hardly learned Angular 1 and got some idea of design patterns, I would have to learn something completely different.
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+At least five or six years later, I noticed the existence of React and recalled a discussion back in 2015 with one of our Java developers, who was asking, we used Angular in one of our commercial projects and not React. So I viewed several hours of tutorial videos and decided I would try once more. After no more than three days I realized, I need to get something to handle the complexity of data in a contesting application: I started learning Redux. After another three days of implementing the most simple data, needed for running a simple contest, in react+redux, I realized I spend about 90% or even more just on boilerplating interfaces, types, action types, action dispatchers and reducers, and less than 10% is left for the actual contest program functionality. At that moment I decided to stop this silly enterprise.
 
+Now I learned Svelte. At first I was afraid it would be just another framework bringing its own kind of complexity and boilerplating into the development process, but it seems that *this* one is made for doing simple things simply and enables complex things to be done without unnecessary additional complexity and workarounds.
 
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+So this is my last and hopefully final (i.e. successful) attempt to make a contesting application in browser. 
