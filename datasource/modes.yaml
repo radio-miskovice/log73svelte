@@ -1,0 +1,6 @@
+log_modes:
+  ssb: ssb
+  cw: cw
+  rtty: rtty
+  psk: psk
+  fm: fm

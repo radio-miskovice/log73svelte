@@ -1,3 +1,6 @@
+<script lang="ts">
+  import BandControls from './BandControls.svelte'
+</script>
 <style>
   div.controls {
     background: #FCF ; 
@@ -9,7 +12,7 @@
   }
 </style>
 <div class="controls" title="Control Panel">
-  <div class="bands">BAND CONTROLS</div>
+  <BandControls />
   <div class="modes">MODE CONTROLS</div>
   <div class="rig">RIG CONTROLS</div>
   <div class="keyer">KEYER CONTROLS</div>
