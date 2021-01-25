@@ -18,12 +18,9 @@ for( let i = 0; i < bands.length ; i++ ) {
 
 function selectBand( event : any ) {
   const c = event.currentTarget
-  const t = event.target
-  console.log( 'before:', currentBand )
   $currentBand = c.id
-  console.log( 'after:', currentBand )
-  console.log( c, t )
 }
+
 function openDialog() {
   showDialog = true
 }

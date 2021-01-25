@@ -57,6 +57,10 @@ export const ALL_BANDS : IBand[] = [
   { id: '33cm',  alt: '902 MHz', rc: 'uhf', ct: false, range: [902000, 928000] },
   { id: '23cm',  alt: '1.3 GHz', rc: 'uhf', ct: true, range: [1240000, 1300000] },
   { id: '13cm',  alt: '2.4 GHz', rc: 'uhf', ct: true, range: [2300000, 2450000] },
+  { id: '9cm', alt: '3.4 GHz', rc: 'shf', ct: true, range: [3300000, 3500000] },
+  { id: '5cm', alt: '5.6 GHz' , rc: 'shf', ct: true, range: [5650000, 5850000] },
+  { id: '3cm', alt: '10 GHz' , rc: 'shf', ct: true, range: [10000000, 10500000] },
+  { id: '1.2cm', alt: '24 GHz', rc: 'shf', ct: true, range: [24000000, 24250000] },
 ]
 
 /* load of bands configuration from persistent storage */

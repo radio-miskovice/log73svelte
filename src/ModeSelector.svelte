@@ -20,7 +20,6 @@
 
   function closeDialogAndSave( e ) {
     const selectedModes = modes.filter( m => m.selected ).map( m => m.id ).join('|')
-    console.log( 'closing mode selector dialog:', selectedModes)
     $selectedModesString = selectedModes
     showDialog = false
   }
@@ -54,10 +53,9 @@
   }  
   ul.modes { 
     list-style-type: none ;
-    display: flex ;
-    flex-flow: column ;
-    align-content: stretch;
-    justify-content: space-evenly;
+    display: grid ;
+    grid-template-columns: repeat(4, 1fr) ;
+    gap: 4px ;
     margin: 0; padding: 0 ;
   }
   ul.modes label { padding: 3px  }
@@ -67,7 +65,7 @@
 </style>
 
 <div class:showDialog>
-  <h3>Select bands to work on:</h3>
+  <h3>Select modes to use:</h3>
   <ul class="modes">
     {#each modes as mode }
     <li><label><input 

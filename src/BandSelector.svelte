@@ -79,6 +79,7 @@
   }
   ul.ranges > li {
     border: 0 0 1px 0 solid gray ;
+    width: 8ch
   }
   ul.bands { 
     list-style-type: none ;
@@ -101,12 +102,12 @@
   <!-- svelte-ignore a11y-label-has-associated-control -->
   <label class="contest" on:click={setOnlyContestBands}>CLICK HERE: ONLY CONTESTING BANDS</label>
   <ul class="ranges">
-    {#each ['lf', 'hf', 'vhf', 'uhf'] as range }
+    {#each ['lf', 'hf', 'vhf', 'uhf', 'shf'] as range }
       <li class="range">
         <label class="range"><input type="checkbox" id="{range}" on:change={setWholeRange}> {range.toUpperCase()}</label>
         <ul class="bands">
           {#each bands.filter( x => x.band.rc === range) as band }
-          <li><label>
+          <li><label title={band.band.alt}>
             <input 
               type="checkbox" 
               id="{band.band.id}" 
