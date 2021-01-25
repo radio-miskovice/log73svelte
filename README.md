@@ -33,6 +33,38 @@ Window header displays UTC time based on your computer clock. This time will als
 Basic station data are edited by clicking edit icon in the header. You can enter callsign, WW locator, name, QTH. More detailed operator or station data are not included and will not be included in the nearest future.
 These data are persisted - when you relaod the application page, they will be automatically retrieved. Data are saved automatically every time you change them.
 
+### Band controls and selector
+
+Band controls are represented by mini buttons, each band used has its button. Clicking on a button will select the respective band. In the log, the current band will be logged as band worked. Button text shows band name in meters - 80m, 2m, 70cm and so on.
+
+Band selector is used to reduce the list of all bands (which is very long - including all Region 1, 2 and 3 band allocations, it represents 31 bands) into a set that will be used in current logging session. So, basically, Band Selector dialog contains list of all bands grouped as LF (3 bands), HF (10 bands), VHF, UHF, SHF and EHF. In version 0.0.3 SHF and EHF are omitted, but will be added soon. The reason is that nobody actually needs a contesting program for these bands, many people would be able to keep their few QSOs on a parking ticket or even remember them in their mind.
+
+You can select or unselect bands individually, or by groups (clicking on group checkbox selects or unselects all bands in that group) and you can also filter out non-contesting bands from your current selection. So preparing for a HF contest in ALL category, unselect all, select HF and than click "ONLY CONTESTING BANDS" and you're done.
+
+Band Selector is just a convenience tool to keep your control panel tidy. You can add or remove bands from your logging selection at any time by clicking **SELECT BANDS >>** label again.
+
+Band selection is persistent, i.e. the application will start with the same set of selected bands and current band after reload.
+
+NOT YET IMPLEMENTED:
+
+- synchronize band controls with rig band switching;
+- alternative display of band names in KHz, MHz, GHz.
+
+### Mode controls and selector
+
+Similarly to band controls and selector, Mode controls switch the mode logged and Mode selector's purpose is to pick up only the modes you intend to log.
+
+Needless to say, Mode Selector is just a convenience tool to keep your control panel tidy. You can add or remove modes from your logging selection at any time by clicking **SELECT MODES >>** label again.
+
+Mode selection is persistent, i.e. the application will start with the same set of selected modes and current mode after reload.
+
+NOT YET IMPLEMENTED:
+
+- two-way mapping between logged modes (contest modes) and rig modes to facilitate synchronization;
+- synchronize mode controls with rig mode switching;
+- mapping logged modes to ADIF and vice versa (for log export to LOTW and other systems);
+- mapping logged modes to Cabrillo and EDI mode identifiers (for contest log export).
+
 ## Planned features
 
 1. Single-page application running entirely in the browser, with the application files served either from internet repository or from a tiny local server (the application does not need any server to run, the server is only needed to load everything into the browser).
