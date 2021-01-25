@@ -1,23 +1,26 @@
-<script context="module" lang="ts">
-export interface SelectableBand {
-  band: IBand,
-  selected: boolean 
-}
-</script>
+
 <script lang="ts">
-import { ALL_BANDS, HF_BAND } from './store/controls';
-import type { IBand } from './store/controls';
+import { ALL_BANDS, currentBand, selectedBandsString } from './store/bands';
+import type { IBand, SelectableBand } from './store/bands';
 import BandSelector from './BandSelector.svelte'
 
-let bands = ALL_BANDS.map( band => ({ band, selected: false }) )
-let currentBand = bands[0].band.id 
-let showDialog : boolean = false 
+let showDialog : boolean = false // control band selection dialog
+let initialSelection = $selectedBandsString.split('|') // persistent selection
+let bands: SelectableBand[] = ALL_BANDS.map( band => ({ band, selected: false }) ) 
+
+for( let i = 0; i < bands.length ; i++ ) {
+  const bandID = bands[i].band.id
+  const selected = initialSelection.find( x => (x == bandID) )
+  if( bandID == selected || bandID == $currentBand ) {
+    bands[i].selected = true
+  } 
+}
 
 function selectBand( event : any ) {
   const c = event.currentTarget
   const t = event.target
   console.log( 'before:', currentBand )
-  currentBand = c.id
+  $currentBand = c.id
   console.log( 'after:', currentBand )
   console.log( c, t )
 }
@@ -25,8 +28,13 @@ function openDialog() {
   showDialog = true
 }
 </script>
+
 <style>
-  div.component { position: relative }
+  div.component { 
+    position: relative ;
+    grid-row: 1 / 2 ;
+    grid-column: 1 / 2 ;
+  }
   ul { list-style-type: none ;
     font-size: smaller ;
     display: flex ;
@@ -39,6 +47,8 @@ function openDialog() {
   label.band.selected { color: white; font-weight: bold }
   label.tiny { font-size: x-small;}
 </style>
+
+
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <div class="component">
   <label class="tiny" on:click={openDialog}>SELECT BANDS &gt;&gt;
@@ -47,11 +57,11 @@ function openDialog() {
     {#each bands as selectable }
       {#if selectable.selected }
       <li><label class="band" id={selectable.band.id}
-        class:selected={selectable.band.id === currentBand}
+        class:selected={selectable.band.id === $currentBand}
         on:click={selectBand}>{selectable.band.id}</label></li>
       {/if}
     {/each}
   </ul>
-  <BandSelector bind:showDialog bind:bands bind:currentBand />
+  <BandSelector bind:showDialog bind:bands />
 </div>
 

@@ -1,3 +1,8 @@
+import { writable } from "svelte/store"
+
+const CURRENT_BAND = 'currentBand'
+const SELECTED_BANDS = 'selectedBands'
+
 export const VLF_BAND = 'vlf'
 export const LF_BAND = 'lf'
 export const MF_BAND = 'mf'
@@ -18,6 +23,12 @@ export interface IBand {
   ct: boolean ;        // Contestable Flag - true if contesting is possible on this band
   range: number[] ;    // Maximum possible frequency range (worldwide) in KHz
 }
+
+export interface SelectableBand {
+  band: IBand,
+  selected: boolean
+}
+
 
 /**
  * rc - range class (vlf, lf, mf, hf, etc.)
@@ -47,3 +58,15 @@ export const ALL_BANDS : IBand[] = [
   { id: '23cm',  alt: '1.3 GHz', rc: 'uhf', ct: true, range: [1240000, 1300000] },
   { id: '13cm',  alt: '2.4 GHz', rc: 'uhf', ct: true, range: [2300000, 2450000] },
 ]
+
+/* load of bands configuration from persistent storage */
+const storedCurrentBand = localStorage.getItem(CURRENT_BAND) || ''
+const storedSelectedBands = localStorage.getItem(SELECTED_BANDS) || ''
+
+/* initialize writables */
+export const currentBand = writable<string>( storedCurrentBand )
+export const selectedBandsString = writable<string>( storedSelectedBands )
+
+/* subscribe to automatic persistent save */
+currentBand.subscribe( x => localStorage.setItem(CURRENT_BAND, x))
+selectedBandsString.subscribe( x => localStorage.setItem(SELECTED_BANDS, x))
