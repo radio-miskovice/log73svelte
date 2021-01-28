@@ -65,6 +65,18 @@ NOT YET IMPLEMENTED:
 - mapping logged modes to ADIF and vice versa (for log export to LOTW and other systems);
 - mapping logged modes to Cabrillo and EDI mode identifiers (for contest log export).
 
+### Contest configuration
+
+Work in progress.
+DONE: Configure contest name, contest name for contest log export, contest exchange codes.
+TODO: Serial numbers, log file export format.
+
+### Entry panel
+
+Work in progress.
+DONE: Display input fields according to contest configuration.
+TODO: Non-editable fields for sent exchange. ESM functionality. CQ / S&P switch. 
+
 ## Planned features
 
 1. Single-page application running entirely in the browser, with the application files served either from internet repository or from a tiny local server (the application does not need any server to run, the server is only needed to load everything into the browser).

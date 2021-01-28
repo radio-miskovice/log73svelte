@@ -37,10 +37,10 @@ export interface SelectableBand {
 export const ALL_BANDS : IBand[] = [
   { id: '2190m', alt: '136 KHz', rc: 'lf', ct: false, range: [135, 138] },
   { id: '631m',  alt: '475 KHz',  rc: 'lf' , ct: false, range: [472, 479] },
-  { id: '560m',  alt: '500 KHz',  rc: 'lf', ct: false, range: [501, 505] },
+  { id: '560m',  alt: '500 KHz',  rc: 'lf', ct: false, range: [501, 504] },
   { id: '160m',  alt: '1.8 MHz',  rc: 'hf', ct: true, range:[ 1750, 2000] },
   { id: '80m',  alt: '3.5 MHz', rc: 'hf', ct: true, range: [3500, 4000] },
-  { id: '60m',  alt: '5.3 MHz', rc: 'hf', ct: false, range: [5300, 5450] },
+  { id: '60m',  alt: '5.3 MHz', rc: 'hf', ct: false, range: [5102, 5450] },
   { id: '40m',  alt: '7 MHz',   rc: 'hf', ct: true, range: [7000, 7300] },
   { id: '30m',  alt: '10.1 MHz', rc: 'hf', ct: false, range: [10100, 10150] },
   { id: '20m',  alt: '14 MHz',  rc: 'hf', ct: true, range: [14000, 14350] },
@@ -60,7 +60,12 @@ export const ALL_BANDS : IBand[] = [
   { id: '9cm', alt: '3.4 GHz', rc: 'shf', ct: true, range: [3300000, 3500000] },
   { id: '5cm', alt: '5.6 GHz' , rc: 'shf', ct: true, range: [5650000, 5850000] },
   { id: '3cm', alt: '10 GHz' , rc: 'shf', ct: true, range: [10000000, 10500000] },
-  { id: '1.2cm', alt: '24 GHz', rc: 'shf', ct: true, range: [24000000, 24250000] },
+  { id: '1.25cm', alt: '24 GHz', rc: 'shf', ct: true, range: [24000000, 24250000] },
+  { id: '6mm', alt: '47 GHz', rc: 'ehf', ct: true, range: [47000000, 47200000] },
+  { id: '4mm', alt: '75 GHz', rc: 'ehf', ct: true, range: [76000000, 81500000] },
+  { id: '2.5mm', alt: '122 GHz', rc: 'ehf', ct: true, range: [122250000, 123000000] }, 
+  { id: '2mm', alt: '134 GHz', rc: 'ehf', ct: true, range: [134000000, 141000000] }, 
+  { id: '1mm', alt: '248 GHz', rc: 'ehf', ct: true, range: [241000000, 250000000] }, 
 ]
 
 /* load of bands configuration from persistent storage */

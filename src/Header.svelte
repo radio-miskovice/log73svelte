@@ -17,7 +17,7 @@
     justify-content: space-between;
     align-items: stretch;
     align-content: stretch;
-    background: red ; color: white ; grid-column: 1 / 5 ;
+    background: red ; color: white ; grid-column: 1 / 4;
   }
   p { display : inline-block; margin: 0; padding: 3px }
   p.clock { text-align: right ; font-family: 'Roboto Mono';}
@@ -25,8 +25,8 @@
   img.icon { height: 0.7em ; width: auto; position: relative; top: 1px; padding-left: 0.5ch  }
 </style>
 <div>
-  <p>Mouse Logger V{version}</p>
-  <p class="upcase">{$mycall}<img class="inline icon" src="./pencil-edit.svg" on:click={toggleStationDialog}/></p>
+  <p>Contest Challenger V{version}</p>
+  <p class="upcase">{$mycall}<img class="inline icon" src="./pencil-edit.svg" on:click={toggleStationDialog} alt="edit station"/></p>
   <p class="clock">UTC {date($time)} {hhmm($time)}<small>{secs($time)}</small></p>
 </div>
 <Station {visible} />

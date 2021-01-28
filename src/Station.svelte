@@ -22,27 +22,28 @@ import { onMount } from 'svelte';
 <style>
   div { 
     background: #FFC ; 
-    padding: 0 1em 1em 1em ;
     grid-column: 1 / 2; 
     display: grid ;
+    row-gap: 6px ;
     grid-template-columns: auto 1fr ; 
     box-shadow: 4px 2px 6px gray ;
     border: 1px solid black ;
     width: 30ch ;
-    margin-left: -15ch ;
     position: fixed ;
     top: 2em ;
     left: 50% ;
-    visibility: hidden;
+    /* visibility: hidden; */
     opacity: 0;
-    transition: all 0.2s ease-in-out 0.2s ;
+    transform: scale(0);
+    animation: hide 0.2s ;
   }
   div.visible { 
     visibility: visible ;
     opacity: 1;
-    transition: all 0.2s ease-in-out 0.2s ;
+    transform: scale(1);
+    animation: show 0.2s ;
   }
-  label { padding: 0.2em 0.4em 0.2em 0 }
+  label { padding: 0.2em }
   label.hint {
     grid-column: 1 / 3 ;
     color: navy ;
@@ -53,7 +54,7 @@ import { onMount } from 'svelte';
   }
   input {
     padding: 0.2em 0.4em ;
-    box-shadow: 2px 2px 4px gray ;
+    box-shadow: 2px 2px 2px silver ;
     border: none; 
     max-width: 17ch
   }
@@ -64,7 +65,7 @@ import { onMount } from 'svelte';
   color: #FFC; background: black ; }
   img.icon { height: 1ch ; background: red; padding: 3px ; border-radius: 2px  }
 </style>
-<div class:visible={visible}>
+<div class:visible={visible} class="dialog">
   <h3>MY STATION</h3>
   <!-- svelte-ignore a11y-label-has-associated-control -->
   <label>My callsign:</label>

@@ -45,21 +45,22 @@
     position: absolute ; 
     top: 0; 
     left : 0; 
-    visibility: hidden; 
     z-index: -1 ;
 
-    padding: 0 1em 1em 1em ;
-    background: #ffc ;
-    box-shadow: 4px 2px 6px gray ;
-    border: 1px solid black ;
-
-    width: max-content
+    width: max-content ;
+    transform: scale(0) ;
+    opacity: 0 ;
+    animation: hide 0.2s ;
   }
+
   div.showDialog {
     visibility: visible ;
     z-index: 3 ;
-    transition: all 0.2s ease-in
+    opacity: 1 ;
+    animation: show 0.2s ;
+    transform: scale(1) ;
   }
+
   h3 { 
     margin: 2px 0 8px 0 ; 
     padding: 4px ; 
@@ -79,7 +80,7 @@
   }
   ul.ranges > li {
     border: 0 0 1px 0 solid gray ;
-    width: 8ch
+    width: 10ch
   }
   ul.bands { 
     list-style-type: none ;
@@ -97,12 +98,12 @@
  
 </style>
 
-<div class:showDialog>
+<div class:showDialog class="dialog" title="">
   <h3>Select bands to work on:</h3>
   <!-- svelte-ignore a11y-label-has-associated-control -->
   <label class="contest" on:click={setOnlyContestBands}>CLICK HERE: ONLY CONTESTING BANDS</label>
   <ul class="ranges">
-    {#each ['lf', 'hf', 'vhf', 'uhf', 'shf'] as range }
+    {#each ['lf', 'hf', 'vhf', 'uhf', 'shf', 'ehf'] as range }
       <li class="range">
         <label class="range"><input type="checkbox" id="{range}" on:change={setWholeRange}> {range.toUpperCase()}</label>
         <ul class="bands">

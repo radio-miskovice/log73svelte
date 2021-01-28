@@ -29,20 +29,23 @@
     position: absolute ; 
     top: 0; 
     left : 0; 
-    visibility: hidden; 
+    
+    transform: scale(0);
     z-index: -1 ;
-
+    /*
     padding: 0 1em 1em 1em ;
     background: #ffc ;
     box-shadow: 4px 2px 6px gray ;
     border: 1px solid black ;
-
-    width: max-content
+    */
+    width: max-content;
+    animation: hide 0.2s ;
   }
   div.showDialog {
     visibility: visible ;
+    transform: scale(1);
     z-index: 3 ;
-    transition: all 0.2s ease-in
+    animation: show 0.2s;
   }
   h3 { 
     margin: 2px 0 8px 0 ; 
@@ -64,7 +67,7 @@
  
 </style>
 
-<div class:showDialog>
+<div class:showDialog class="dialog">
   <h3>Select modes to use:</h3>
   <ul class="modes">
     {#each modes as mode }

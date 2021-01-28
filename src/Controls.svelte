@@ -1,13 +1,14 @@
 <script lang="ts">
   import BandControls from './BandControls.svelte'
   import ModeControls from './ModeControls.svelte'
+  import ContestControls from './ContestControls.svelte'
 </script>
 <style>
   div.controls {
     background: #FCF ; 
-    grid-column: 1 / 5 ;
+    grid-column: 1 / 4 ;
     display: grid ;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(4, auto);
     gap: 6px ;
     padding: 6px ;
   }
@@ -17,5 +18,5 @@
   <ModeControls />
   <div class="rig">RIG CONTROLS</div>
   <div class="keyer">KEYER CONTROLS</div>
-  <div class="contest">CONTEST CONTROLS</div>
+  <ContestControls />
 </div>
