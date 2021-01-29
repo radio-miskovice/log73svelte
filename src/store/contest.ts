@@ -1,7 +1,15 @@
 import { writable } from "svelte/store";
 
 
-const lastContestName = localStorage.getItem('contest.name') || ''
+const CONTEST_NAME = 'contest.name';
+const CONTEST_NAME_EXPORT = 'contest.name.export';
+const CONTEST_EXCH1_SENT = 'contest.exch1.sent';
+const CONTEST_EXCH2_SENT = 'contest.exch2.sent';
+
+const lastContestName = localStorage.getItem(CONTEST_NAME) || ''
+const lastContestExpName = localStorage.getItem(CONTEST_NAME_EXPORT) || ''
+const lastExch1Sent = localStorage.getItem(CONTEST_EXCH1_SENT) || ''
+const lastExch2Sent = localStorage.getItem(CONTEST_EXCH2_SENT) || ''
 
 const defaultTemplate = JSON.stringify({ 
   hasRst : true,
@@ -29,16 +37,24 @@ export const exch1Width = writable<number>(contestTemplate.exch1Width)
 export const exch2Label = writable<string>(contestTemplate.exch2Label)
 export const exch2Width = writable<number>(contestTemplate.exch2Width)
 export const contestName = writable<string>(lastContestName)
+export const contestNameExport = writable<string>(lastContestExpName)
 
-hasRst.subscribe(hasRst => { contestTemplate.hasRst = hasRst; localStorage.setItem('contest.setup', JSON.stringify(contestTemplate)) })
-hasSerial.subscribe(hasSerial => { contestTemplate.hasSerial = hasSerial; localStorage.setItem('contest.setup', JSON.stringify(contestTemplate)) })
-hasGrid.subscribe(hasGrid => { contestTemplate.hasGrid = hasGrid; localStorage.setItem('contest.setup', JSON.stringify(contestTemplate)) })
-hasExch1.subscribe(hasExch1 => { contestTemplate.hasExch1 = hasExch1; localStorage.setItem('contest.setup', JSON.stringify(contestTemplate)) })
-hasExch2.subscribe(hasExch2 => { contestTemplate.hasExch2 = hasExch2; localStorage.setItem('contest.setup', JSON.stringify(contestTemplate)) })
+export const exch1Sent = writable<string>(lastExch1Sent)
+export const exch2Sent = writable<string>(lastExch2Sent)
 
-exch1Label.subscribe( exch1Label => { contestTemplate.exch1Label = exch1Label ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
-exch1Width.subscribe( exch1Width => { contestTemplate.exch1Width = exch1Width ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
-exch2Label.subscribe( exch2Label => { contestTemplate.exch2Label = exch2Label ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
-exch2Width.subscribe( exch2Width => { contestTemplate.exch2Width = exch2Width ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
+hasRst.subscribe(value => { contestTemplate.hasRst = value; localStorage.setItem('contest.setup', JSON.stringify(contestTemplate)) })
+hasSerial.subscribe(value => { contestTemplate.hasSerial = value; localStorage.setItem('contest.setup', JSON.stringify(contestTemplate)) })
+hasGrid.subscribe(value => { contestTemplate.hasGrid = value; localStorage.setItem('contest.setup', JSON.stringify(contestTemplate)) })
+hasExch1.subscribe(value => { contestTemplate.hasExch1 = value; localStorage.setItem('contest.setup', JSON.stringify(contestTemplate)) })
+hasExch2.subscribe(value => { contestTemplate.hasExch2 = value; localStorage.setItem('contest.setup', JSON.stringify(contestTemplate)) })
 
-contestName.subscribe( contestName => localStorage.setItem( 'contestName', contestName ))
+exch1Label.subscribe( value => { contestTemplate.exch1Label = value ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
+exch1Width.subscribe( value => { contestTemplate.exch1Width = value ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
+exch2Label.subscribe( value => { contestTemplate.exch2Label = value ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
+exch2Width.subscribe( value => { contestTemplate.exch2Width = value ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
+
+contestName.subscribe( value => localStorage.setItem('contest.name', value))
+contestNameExport.subscribe(value => localStorage.setItem('contest.name.export', value))
+
+exch1Sent.subscribe(value => localStorage.setItem(CONTEST_EXCH1_SENT, value))
+exch2Sent.subscribe(value => localStorage.setItem(CONTEST_EXCH2_SENT, value))

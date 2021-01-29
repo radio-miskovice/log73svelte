@@ -23,8 +23,8 @@ export const myname = writable<string>(init.myname)
 export const myqth = writable<string>(init.myqth)
 export const email = writable<string>(init.email)
 
-mycall.subscribe(x => localStorage.setItem('mycall', x))
-mywwloc.subscribe(x => localStorage.setItem('mywwloc', x))
+mycall.subscribe(x => localStorage.setItem('mycall', x.toUpperCase()))   // keep callsigns in upper case
+mywwloc.subscribe(x => localStorage.setItem('mywwloc', x.toUpperCase())) // keep WW loc in upper case
 myname.subscribe(x => localStorage.setItem('myname', x))
 myqth.subscribe(x => localStorage.setItem('myqth', x))
-email.subscribe(x => localStorage.setItem('email', x))
+email.subscribe(x => localStorage.setItem('email', x.toLowerCase()))

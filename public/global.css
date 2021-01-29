@@ -13,12 +13,32 @@ body {
 	font-family: Rubik, Roboto, Verdana, Helvetica, sans-serif;
 }
 
+div.panel {
+  padding: 8px ;
+}
+
 .dialog {
   background: #FFC ;
   color: #3333ac ;
   padding: 4px ;
   box-shadow: 4px 2px 6px gray ;
   border: 1px solid black ;
+  position: absolute;
+  top: 0 ;
+  width: max-content;
+  visibility: hidden;
+  opacity: 0 ;
+  transform: scale(0);
+  z-index: -1;
+  transition: all 0.33s ;
+}
+
+div.dialog.showDialog {
+    visibility: visible;
+    transform: scale(1);
+    opacity: 1 ;
+    z-index: 3;
+    transition: all 0.33s ;
 }
 
 .dialog h3 { 
@@ -28,15 +48,24 @@ body {
   color: #FFC; 
   background: black ; 
   user-select: none;
+  position: relative ;
+}
+
+.dialog h3 img.close {
+    position: absolute ;
+    top: 4px ;
+    right: 4px ;
+    height: 1.25em ;
 }
 
 label { font-size: -2 ; color: #555; text-transform: uppercase capitalize;}
 label.tiny { color: gray ; font-size: x-small ; user-select:  none ;}
 label.small { color: gray ; font-size: small; width: fit-content ; user-select: none;}
-input[type=text], input[type=number] {
+input[type=text], input[type=number], input[type=date], input[type=time]
+  , input[type=datetime-local] {
   padding : 4px ;
-  border : thin solid gray ;
-  box-shadow: 2px 2px 3px silver ;
+  border : thin solid darkslateblue ;
+  box-shadow: 2px 2px 3px gray ;
 }
   p { padding: 3px; margin: 0  }
 
@@ -90,32 +119,7 @@ button:disabled {
 button:not(:disabled):active {
 	background-color: #ddd;
 }
-
+/* 
 button:focus {
 	border-color: #666;
-}
-
-  @keyframes show {
-    from {
-      transform: scale(0.1,0.1) ;
-      opacity: 0;
-      z-index: -1;
-    }
-    to {
-      transform: scale(1) ;
-      opacity: 1 ;
-      z-index: 3 ;
-    }
-  }
-  @keyframes hide {
-    from {
-      transform: scale(1) ;
-      opacity: 1 ;
-      z-index: 3 ;
-    }
-    to {
-      transform: scale(0) ;
-      opacity: 0;
-      z-index: -1;
-    }
-  }
+} */
