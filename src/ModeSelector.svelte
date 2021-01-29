@@ -1,83 +1,87 @@
 <script lang="ts">
+  import { currentMode, selectedModesString } from "./store/modes";
+  import type { SelectableMode } from "./store/modes";
+  export let showDialog: boolean;
+  export let modes: SelectableMode[];
 
-  import { currentMode, selectedModesString  } from './store/modes'
-  import type { SelectableMode } from './store/modes'
-  export let showDialog: boolean
-  export let modes : SelectableMode[]
-
-  function checkOneMode ( event ) {
-    const t = event.currentTarget
-    if( $currentMode == t.id && !t.checked ) {
-      for( const m of modes ) {
-        if( m.selected ) {
-          $currentMode = m.id ;
-          break ;
+  function checkOneMode(event: Event) {
+    const t: any = event.target;
+    console.log(t);
+    if ($currentMode == t.id && !t.checked) {
+      for (const m of modes) {
+        if (m.selected) {
+          $currentMode = m.id;
+          return;
         }
       }
-      $currentMode = ''
+      if (modes.length > 0) $currentMode = modes[0].id;
+      else $currentMode = "";
     }
   }
 
-  function closeDialogAndSave( e ) {
-    const selectedModes = modes.filter( m => m.selected ).map( m => m.id ).join('|')
-    $selectedModesString = selectedModes
-    showDialog = false
+  function closeDialog( e: Event ) {
+    const selectedModes = modes
+      .filter((m) => m.selected)
+      .map((m) => m.id)
+      .join("|");
+    $selectedModesString = selectedModes;
+    showDialog = false;
   }
 </script>
-<style>
-  div {
-    position: absolute ; 
-    top: 0; 
-    left : 0; 
-    
-    transform: scale(0);
-    z-index: -1 ;
-    /*
-    padding: 0 1em 1em 1em ;
-    background: #ffc ;
-    box-shadow: 4px 2px 6px gray ;
-    border: 1px solid black ;
-    */
-    width: max-content;
-    animation: hide 0.2s ;
-  }
-  div.showDialog {
-    visibility: visible ;
-    transform: scale(1);
-    z-index: 3 ;
-    animation: show 0.2s;
-  }
-  h3 { 
-    margin: 2px 0 8px 0 ; 
-    padding: 4px ; 
-    text-align: center;
-    color: #FFC; 
-    background: black ; 
-  }  
-  ul.modes { 
-    list-style-type: none ;
-    display: grid ;
-    grid-template-columns: repeat(4, 1fr) ;
-    gap: 4px ;
-    margin: 0; padding: 0 ;
-  }
-  ul.modes label { padding: 3px  }
-  label.tiny { font-size: x-small; color: gray; text-align: right; text-transform: uppercase; width: 100% }
-  input[type=checkbox] { padding-top: 2px }
- 
-</style>
 
 <div class:showDialog class="dialog">
-  <h3>Select modes to use:</h3>
+  <h3>
+    Select modes to use:<img
+      class="close"
+      src="./check.svg"
+      alt="X"
+      on:click={closeDialog}
+      title="click to save and close"
+    />
+  </h3>
   <ul class="modes">
-    {#each modes as mode }
-    <li><label><input 
-        type="checkbox" 
-        id="{mode.id}" 
-        bind:checked={mode.selected}
-        on:change={checkOneMode}> {mode.id}</label></li>
-  {/each}
+    {#each modes as mode}
+      <li>
+        <label
+          ><input
+            type="checkbox"
+            id={mode.id}
+            bind:checked={mode.selected}
+            on:change={checkOneMode}
+          />
+          {mode.id}</label
+        >
+      </li>
+    {/each}
   </ul>
   <!-- svelte-ignore a11y-label-has-associated-control -->
-  <label class="tiny" on:click={closeDialogAndSave}>SAVE &amp; CLOSE &gt;&gt</label>
+  <label class="tiny" on:click={closeDialog}>SAVE &amp; CLOSE &gt;&gt</label>
 </div>
+
+<style>
+
+  ul.modes {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+  }
+  ul.modes label {
+    padding: 3px;
+  }
+  label.tiny {
+    font-size: x-small;
+    color: gray;
+    text-align: right;
+    text-transform: uppercase;
+    width: 100%;
+  }
+  input[type="checkbox"] {
+    padding-top: 2px;
+  }
+  img.close {
+    left: 4px;
+  }
+</style>

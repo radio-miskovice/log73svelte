@@ -24,18 +24,7 @@
     display: flex;
     flex-flow: column;
     position: relative ;
+    z-index: 1 ;
   }
-  label {
-    display: block;
-  }
-  /*
-  .nodisplay {
-    display: none;
-  }
-  */
-  input[type=text] {
-    margin-bottom: 1em;
-    display: inline-block;
-    max-width: 100%
-  }
+
 </style>

@@ -38,9 +38,12 @@
  * deleted:   deleted record indicator. Data are never actually deleted, just marked as deleted, not to be used
  */
 
+import { contestName } from "./contest";
+
 export interface Qso {
   id: string ; 
   utcDateTime : Date ; 
+  contestName : string ;
   ftx?: number ; // integer
   frx?: number ; // integer
   band : string ;  

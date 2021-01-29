@@ -1,32 +1,67 @@
 <script lang="ts">
-  import Station from './Station.svelte'
-  import { time, mycall } from './store/station'
-  export let version: string
-  const date = ( t: string ) => t.slice(0,10)
-  const hhmm = (t: string ) => t.slice(11, 16)
-  const secs = (t: string ) => t.slice(16, 19)
-  let visible : boolean = false
+  import Station from "./Station.svelte";
+  import { time, mycall, mywwloc } from "./store/station";
+  export let version: string;
+  const date = (t: string) => t.slice(0, 10);
+  const hhmm = (t: string) => t.slice(11, 16);
+  const secs = (t: string) => t.slice(16, 19);
+  let showDialog: boolean = false;
 
   function toggleStationDialog() {
-    visible = !visible
+    showDialog = !showDialog;
   }
 </script>
+
+<div>
+  <p>Contest Challenger V{version}</p>
+  <p>
+    {$mycall.toUpperCase()} in {$mywwloc.toUpperCase()}<img
+      class="inline icon"
+      src="./pencil-edit.svg"
+      on:click={toggleStationDialog}
+      alt="edit station"
+    />
+    <Station bind:showDialog />
+  </p>
+  <p class="clock">
+    UTC {date($time)}
+    {hhmm($time)}<small>{secs($time)}</small>
+  </p>
+</div>
+
 <style>
-  div { display: flex ; flex-flow: row ; 
+  div {
+    grid-area: "hdr";
+    grid-column: span 3 ;
+
+    background: red;
+    color: white;
+
+    display: flex;
+    flex-flow: row;
     justify-items: stretch;
     justify-content: space-between;
     align-items: stretch;
     align-content: stretch;
-    background: red ; color: white ; grid-column: 1 / 4;
   }
-  p { display : inline-block; margin: 0; padding: 3px }
-  p.clock { text-align: right ; font-family: 'Roboto Mono';}
-  small { color: yellow }
-  img.icon { height: 0.7em ; width: auto; position: relative; top: 1px; padding-left: 0.5ch  }
+  p {
+    display: inline-block;
+    margin: 0;
+    padding: 3px;
+    position: relative ;
+  }
+  p.clock {
+    text-align: right;
+    font-family: "Roboto Mono";
+  }
+  small {
+    color: yellow;
+  }
+  img.icon {
+    height: 0.7em;
+    width: auto;
+    position: relative;
+    top: 1px;
+    padding-left: 0.5ch;
+  }
 </style>
-<div>
-  <p>Contest Challenger V{version}</p>
-  <p class="upcase">{$mycall}<img class="inline icon" src="./pencil-edit.svg" on:click={toggleStationDialog} alt="edit station"/></p>
-  <p class="clock">UTC {date($time)} {hhmm($time)}<small>{secs($time)}</small></p>
-</div>
-<Station {visible} />
