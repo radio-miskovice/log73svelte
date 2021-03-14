@@ -25,8 +25,7 @@
 
 <div class:showDialog class="dialog">
   <h3>MY STATION<img class="close" src="./check.svg" alt="X" on:click={closeDialog} title="click to save and close"></h3>
-  <!-- svelte-ignore a11y-label-has-associated-control -->
-  <label>My callsign:</label>
+  <p>My callsign:</p>
   <input
     class="upcase"
     type="text"
@@ -34,8 +33,7 @@
     maxlength="16"
     on:keypress={closeOnEnter}
   />
-  <!-- svelte-ignore a11y-label-has-associated-control -->
-  <label>Grid:</label>
+  <p>Grid:</p>
   <input
     class="upcase wwloc"
     type="text"
@@ -46,8 +44,7 @@
     class:invalid={!validGrid}
   />
 
-  <!-- svelte-ignore a11y-label-has-associated-control -->
-  <label>Operator name:</label>
+  <p>Operator name:</p>
   <input
     type="text"
     bind:value={$myname}
@@ -55,8 +52,7 @@
     on:keypress={closeOnEnter}
   />
 
-  <!-- svelte-ignore a11y-label-has-associated-control -->
-  <label>QTH:</label>
+  <p>QTH:</p>
   <input
     type="text"
     bind:value={$myqth}
@@ -64,8 +60,7 @@
     on:keypress={closeOnEnter}
   />
 
-  <!-- svelte-ignore a11y-label-has-associated-control -->
-  <label>E-mail:</label>
+  <p>E-mail:</p>
   <input
     type="text"
     bind:value={$email}
@@ -73,44 +68,45 @@
     on:keypress={closeOnEnter}
   />
 
-  <!-- svelte-ignore a11y-label-has-associated-control -->
-  <!-- svelte-ignore a11y-missing-attribute -->
-  <label class="hint"
-    >Click edit icon <img class="icon" src="./pencil-edit.svg" /> or press Enter
-    in any input field to close the dialog. Data are saved automatically as you edit.</label
-  >
+  <p class="tiny right" on:click={closeDialog}>SAVE &amp; CLOSE &nbsp;</p>
 </div>
 
 <style>
   div.dialog {
     top: 1em;
-    left: -15ch ;
+    left: 50% ;
+    margin-left: -10em ;
     display: grid;
     row-gap: 6px;
     grid-template-columns: auto 1fr;
-    width: 30ch;
+    width: 20em;
   }
 
-  label {
-    padding: 0.2em;
+  p {
+    padding: 0 0.5em;
+    color: black ;
+    text-align: right ;
   }
-  label.hint {
-    grid-column: 1 / 3;
-    color: navy;
-    font-size: smaller;
-    font-style: italic;
-    text-align: center;
-    padding-top: 1em;
+
+  p.tiny.right {
+    color: gray ;
+    user-select: none ;
+    grid-column: 2 / 3 ;
+    max-width: 100% ;
+    padding: 4px;
   }
+
   input {
     padding: 0.2em 0.4em;
     box-shadow: 2px 2px 2px silver;
     border: none;
     max-width: 17ch;
   }
+
   input.wwloc {
     max-width: 8ch;
   }
+
   input.invalid {
     color: red;
     text-decoration-style: wavy;
@@ -120,18 +116,4 @@
     grid-column: 1 / 3;
   }
 
-  img.icon {
-    height: 1ch;
-    background: red;
-    padding: 3px;
-    border-radius: 2px;
-  }
-  /*
-  img.close {
-    position: absolute ;
-    top: 4px ;
-    right: 4px ;
-    height: 1.25em ;
-  }
-  */
 </style>

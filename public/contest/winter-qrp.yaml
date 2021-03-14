@@ -1,0 +1,56 @@
+# Challenger Contest File
+---
+name: 
+  en: Winter QRP Contest
+  cz: Zimní QRP závod
+scope: EU
+export: EDI
+exportName: WINTER-QRP
+submission:
+  email: ok1dom@seznam.cz
+categories:
+  band:
+    - 2m
+    - 70cm
+  power:
+    - QRP
+  operators:
+    - MULTI
+  assisted:
+    - ASSISTED
+multipliers: none
+exchange:
+  rst: true
+  serial: per band
+  wwloc: true
+dates:
+  next: 
+    start: 2021-02-07T09:00:00z
+    end:   2021-02-07T13:00:00z
+  periods:
+    - start: 2021-02-07T09:00:00z
+      end:   2021-02-07T11:00:00z
+      bands:
+        - 70cm
+    - start: 2021-02-07T11:00:00z
+      end:   2021-02-07T13:00:00z
+      bands:
+        - 2m
+limitations:
+  bands:
+    - 2m
+    - 70cm
+  modes:
+    - cw
+    - phone
+  other:
+    - Maximum power is 10 watts.
+    - All equipment including antennas must be located within 500 meters perimeter.
+    - No remote operation permitted.
+    - Power supply only from chemical accumulators or batteries. Recharging allowed from solar, peltier, or human-powered devices.
+    - Antennas may be erected no earlier than on Friday before the contest.
+    - EME, cross-band, repeater and satellite QSOs do not count.
+    - DX cluster, chat or mobile allowed.
+
+
+

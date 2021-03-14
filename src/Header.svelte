@@ -15,18 +15,22 @@
 <div>
   <p>Contest Challenger V{version}</p>
   <p>
-    {$mycall.toUpperCase()} in {$mywwloc.toUpperCase()}<img
+    {$mycall.toUpperCase()} in {$mywwloc.toUpperCase()}
+    <svg class="icon" on:click={toggleStationDialog}>
+      <use xlink:href="#icon-edit" />
+    </svg>
+    <!-- <img
       class="inline icon"
       src="./pencil-edit.svg"
       on:click={toggleStationDialog}
       alt="edit station"
-    />
-    <Station bind:showDialog />
+    /> -->
   </p>
   <p class="clock">
     UTC {date($time)}
     {hhmm($time)}<small>{secs($time)}</small>
   </p>
+  <Station bind:showDialog />
 </div>
 
 <style>
@@ -57,11 +61,13 @@
   small {
     color: yellow;
   }
-  img.icon {
-    height: 0.7em;
-    width: auto;
+  svg.icon {
+    height: 1rem;
+    width: 1rem ;
     position: relative;
     top: 1px;
     padding-left: 0.5ch;
+    stroke: white ;
+    fill: white ;
   }
 </style>

@@ -13,6 +13,14 @@ body {
 	font-family: Rubik, Roboto, Verdana, Helvetica, sans-serif;
 }
 
+h2, h3, h4 { font-family: Roboto, Verdana, Helvetica, sans-serif }
+
+
+svg.icon {
+  height: 0.9em;
+  width: 0.9em;
+}
+
 div.panel {
   padding: 8px ;
 }
@@ -58,9 +66,26 @@ div.dialog.showDialog {
     height: 1.25em ;
 }
 
+img.close {
+    position: absolute ;
+    top: 4px ;
+    right: 4px ;
+    height: 1.25em ;
+}
+
+.icon-close {
+    position: absolute ;
+    top: 4px ;
+    right: 4px ;
+    height: 1.25em ;
+}
+
 label { font-size: -2 ; color: #555; text-transform: uppercase capitalize;}
-label.tiny { color: gray ; font-size: x-small ; user-select:  none ;}
-label.small { color: gray ; font-size: small; width: fit-content ; user-select: none;}
+
+p.right { text-align: right; width: 100%; }
+
+.tiny { color: gray ; font-size: x-small ; user-select:  none ;}
+.small { color: gray ; font-size: small; width: fit-content ; user-select: none;}
 input[type=text], input[type=number], input[type=date], input[type=time]
   , input[type=datetime-local] {
   padding : 4px ;
@@ -126,7 +151,6 @@ button:focus {
 
 button.action {
   width: 6ch ;
-  max-width: 48%;
   background-color: rgb(217, 217, 217);
   border: none ;
   box-shadow: 2px 2px 2px gray ;
@@ -136,3 +160,33 @@ button.action:active {
   transform: translate( 2px, 2px );
   box-shadow: none ;
 }
+
+p.alert {
+    font-size: small ;
+    text-align: center ;
+    padding: 4px ;
+    margin: 0 2px ;
+    border-radius: 4px ;
+    color: rgb(253, 226, 226) ;
+    background: rgb(166, 11, 11)
+}
+
+/* band and mode buttons */
+  div.component {
+    position: relative ;
+    grid-column: 1 / 2 ;
+  }
+  ul.buttonPanel {
+    list-style-type: none;
+    font-size: smaller;
+    display: flex;
+    flex-flow: row wrap ;
+    margin: 0;
+    padding: 0;
+
+  }
+  ul.buttonPanel li {
+    display: block;
+    margin: 0 ;
+    padding: 2px;
+  }

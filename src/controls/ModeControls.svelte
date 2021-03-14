@@ -1,7 +1,7 @@
 
 <script lang="ts">
-import { ALL_MODES, currentMode, selectedModesString } from './store/modes';
-import type { SelectableMode } from './store/modes';
+import { ALL_MODES, currentMode, selectedModesString } from '../store/modes';
+import type { SelectableMode } from '../store/modes';
 import ModeSelector from './ModeSelector.svelte'
 
 let showDialog = false // control band selection dialog
@@ -28,29 +28,25 @@ function openDialog() {
 
 <style>
   div.component { 
-    position: relative ;
-    grid-column: 1 / 2 ;
     grid-row:   2 / 3 ;
   }
-  ul { list-style-type: none ;
+  /* ul { list-style-type: none ;
     font-size: smaller ;
     display: flex ;
     flex-flow: row wrap ;
     margin: 0; padding: 0 ;
     max-width: 25ch 
   }
-  li { display: block; margin: 0; padding: 2px   }
+  li { display: block; margin: 0; padding: 2px   } */
   label.mode {  text-align: center ; color: silver; background: rgb(138, 16, 142) ; border-radius: 3px; width: 6ch; padding: 3px }
   label.mode.selected { color: white; font-weight: bold }
-  label.tiny { font-size: x-small;}
 </style>
 
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <div class="component">
-  <label class="tiny" on:click={openDialog}>SELECT MODES &gt;&gt;
-  </label>
-  <ul>
+  <p class="tiny" on:click={openDialog}>SELECT MODES <svg class="icon"><use xlink:href="#icon-config" /></svg> </p>
+  <ul class="buttonPanel">
     {#each modes as mode }
       {#if mode.selected }
       <li><label class="mode" id={mode.id}

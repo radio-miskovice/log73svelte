@@ -38,12 +38,13 @@
  * deleted:   deleted record indicator. Data are never actually deleted, just marked as deleted, not to be used
  */
 
-import { contestName } from "./contest";
+import { writable } from "svelte/store";
+import { db } from "./database";
 
-export interface Qso {
+export interface IQso {
   id: string ; 
   utcDateTime : Date ; 
-  contestName : string ;
+  contestId : string ;
   ftx?: number ; // integer
   frx?: number ; // integer
   band : string ;  
@@ -54,19 +55,36 @@ export interface Qso {
   op?: string ;
   call: string ;
   //------ exchange sent -------
-  reportS?: string ;
-  serialS?: number ;
+  rstS?: string ;
+  serialS?: string ;
   gridS?: string ;
   ex1S?: string ;
   ex2S?: string ;
   //------ exchange received -------
-  reportR?: string;
-  serialR?: number;
+  rstR?: string;
+  serialR?: string;
   gridR?: string;
   ex1R?: string;
   ex2R?: string;
   note?: string ;
   xtra?: Object ;
   deleted: boolean ;
+  dateSaved?: Date ;
 }
+
+export function emptyQso() : IQso {
+  return {
+    id: '',
+    utcDateTime: new Date(),
+    contestId: '',
+    band: '',
+    mode: '',
+    mycall: '',
+    call: '',
+    deleted: false
+  }
+}
+
+export const qsoLog = writable<IQso[]>( [] );
+
 

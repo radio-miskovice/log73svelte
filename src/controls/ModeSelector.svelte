@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { currentMode, selectedModesString } from "./store/modes";
-  import type { SelectableMode } from "./store/modes";
+  import { currentMode, selectedModesString } from "../store/modes";
+  import type { SelectableMode } from "../store/modes";
   export let showDialog: boolean;
   export let modes: SelectableMode[];
 
@@ -42,15 +42,8 @@
   <ul class="modes">
     {#each modes as mode}
       <li>
-        <label
-          ><input
-            type="checkbox"
-            id={mode.id}
-            bind:checked={mode.selected}
-            on:change={checkOneMode}
-          />
-          {mode.id}</label
-        >
+        <label><input type="checkbox" id={mode.id} bind:checked={mode.selected}
+            on:change={checkOneMode} /> {mode.id}</label>
       </li>
     {/each}
   </ul>

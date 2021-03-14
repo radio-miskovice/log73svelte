@@ -1,29 +1,19 @@
-var db : IDBDatabase ;
+import type { IContestDatarecord } from "./contest";
+import Dexie from 'dexie' ;
+import type { IQso } from "./contact";
 
-export function openDb() {
-  const rq = indexedDB.open('challenger', 1)
-  rq.onerror = (err) => {
-    console.log('Database opening error')
-    console.log(err)
-  }
-  rq.onupgradeneeded = ( event: IDBVersionChangeEvent ) => {
-    let version = event.oldVersion
-    while( version < event.newVersion ) {
-      version++ ;
-      switch( version ) {
-        case 1:
-          buildVersion1( event.target.result )
-          break ;
-      }
-    }
-  }
-  rq.onsuccess = () => {
-    db = rq.result
+const DB_NAME = 'challenger-dev2' // this name will be changed in the release version5
+
+class ChallengerDatabase extends Dexie {
+  contest: Dexie.Table<IContestDatarecord,string> ;
+  log: Dexie.Table<IQso,string>;
+  constructor() {
+    super( DB_NAME ) ;
+    this.version(1).stores({
+      contest: 'id,startDate,name,deleted',
+      log: 'id,mycall,call,utcDateTime,contestId,band,mode,deleted'
+    });
   }
 }
 
-function buildVersion1( db: IDBDatabase ) {
-  const log = db.createObjectStore('log', { autoIncrement: true })
-  log.createIndex('call', 'call', { unique: false })
-  log.createIndex('utc', 'utcDateTime', { unique: false })
-}
+export const db = new ChallengerDatabase();

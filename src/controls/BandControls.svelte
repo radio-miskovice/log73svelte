@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { ALL_BANDS, currentBand, selectedBandsString } from "./store/bands";
-  import type { IBand, SelectableBand } from "./store/bands";
+  import { ALL_BANDS, currentBand, selectedBandsString } from "../store/bands";
+  import type { IBand, SelectableBand } from "../store/bands";
   import BandSelector from "./BandSelector.svelte";
 
   let showDialog: boolean = false; // control band selection dialog
@@ -30,8 +30,8 @@
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <div class="component">
-  <label class="tiny" on:click={openDialog}>SELECT BANDS &gt;&gt; </label>
-  <ul>
+  <p class="tiny" on:click={openDialog}>SELECT BANDS <svg class="icon"><use xlink:href="#icon-config" stroke="black" /></svg></p>
+  <ul class="buttonPanel">
     {#each bands as selectable}
       {#if selectable.selected}
         <li>
@@ -51,24 +51,21 @@
 
 <style>
   div.component {
-    position: relative;
     grid-row: 1 / 2;
-    grid-column: 1 / 2;
   }
-  ul {
+  /* ul {
     list-style-type: none;
     font-size: smaller;
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    grid-template-columns: repeat(4,auto);
     margin: 0;
     padding: 0;
-    max-width: 25ch;
   }
   li {
     display: block;
-    margin: 0;
+    margin: 0 ;
     padding: 2px;
-  }
+  } */
   label.band {
     text-align: center;
     color: silver;
@@ -81,7 +78,5 @@
     color: white;
     font-weight: bold;
   }
-  label.tiny {
-    font-size: x-small;
-  }
+
 </style>

@@ -13,10 +13,11 @@
   div#actions {
     grid-area: "act";
     grid-column: span 3 ;
-    background: rgb(143, 220, 248) ;
+    background:#cff ;
   }
   div#buttons {
-    display: block grid ;
+    display: block flex ;
+    flex-flow: row wrap ;
   }
-  button { width: 8rem ; height: 1.6rem; font-weight: bold;   }
+  button { width: 8rem ; height: 1.6rem; font-weight: bold; margin: 6px }
 </style>

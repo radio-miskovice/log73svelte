@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { SelectableBand } from "./store/bands";
-  import { selectedBandsString, currentBand } from "./store/bands";
+  import type { SelectableBand } from "../store/bands";
+  import { selectedBandsString, currentBand } from "../store/bands";
   export let showDialog: boolean;
   export let bands: SelectableBand[];
 
@@ -46,13 +46,8 @@
 
 <div class:showDialog class="dialog" title="Select bands">
   <h3>
-    <img
-      class="close"
-      src="./check.svg"
-      alt="X"
-      on:click={closeDialog}
-      title="click to save and close"
-    />Select bands to work on:
+    <img class="close left" src="./check.svg" alt="X" on:click={closeDialog} title="click to save and close"> 
+    Select bands to work on:
   </h3>
   <!-- svelte-ignore a11y-label-has-associated-control -->
   <label class="contest" on:click={setOnlyContestBands}
@@ -90,7 +85,7 @@
 <style>
   div {
     left: 0;
-  } 
+  }
 
   ul.ranges {
     list-style-type: none;
@@ -142,5 +137,7 @@
   input[type="checkbox"] {
     padding-top: 2px;
   }
-  img.close { left: 4px }
+  img.close.left {
+    left: 4px ;
+  }
 </style>

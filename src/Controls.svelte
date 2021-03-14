@@ -1,14 +1,16 @@
 <script lang="ts">
-  import BandControls from "./BandControls.svelte";
-  import ModeControls from "./ModeControls.svelte";
-  import ContestControls from "./ContestControls.svelte";
+  import BandControls from "./controls/BandControls.svelte";
+  import ModeControls from "./controls/ModeControls.svelte";
+  import KeyerControls from "./controls/KeyerControls.svelte";
+  import ContestControls from "./controls/ContestControls.svelte";
+  import RigControls from "./controls/RigControls.svelte";
 </script>
 
 <div id="controls">
   <BandControls />
   <ModeControls />
-  <div class="rig">RIG CONTROLS</div>
-  <div class="keyer">KEYER CONTROLS</div>
+  <RigControls />
+  <KeyerControls />
   <ContestControls />
 </div>
 
@@ -21,7 +23,6 @@
     padding: 6px;
 
     display: grid;
-    grid-template-columns: repeat(4, auto);
-    gap: 6px;
+    grid-template-columns: minmax(12em, 31%) auto max-content max-content ;
   }
 </style>
