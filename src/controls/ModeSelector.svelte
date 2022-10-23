@@ -7,16 +7,15 @@
   function checkOneMode(event: Event) {
     const t: any = event.target;
     console.log(t);
-    if ($currentMode == t.id && !t.checked) {
+    if ($currentMode == t.id && !t.checked) 
+    $currentMode = '' ;
+    if( $currentMode == '' )
       for (const m of modes) {
         if (m.selected) {
           $currentMode = m.id;
           return;
         }
       }
-      if (modes.length > 0) $currentMode = modes[0].id;
-      else $currentMode = "";
-    }
   }
 
   function closeDialog( e: Event ) {
@@ -31,6 +30,7 @@
 
 <div class:showDialog class="dialog">
   <h3>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     Select modes to use:<img
       class="close"
       src="./check.svg"
@@ -48,6 +48,7 @@
     {/each}
   </ul>
   <!-- svelte-ignore a11y-label-has-associated-control -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <label class="tiny" on:click={closeDialog}>SAVE &amp; CLOSE &gt;&gt</label>
 </div>
 

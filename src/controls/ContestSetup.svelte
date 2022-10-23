@@ -48,7 +48,7 @@
       || ( (event instanceof KeyboardEvent) && event.key == 'Enter' )) {
       event.preventDefault();
       event.stopPropagation();
-      window.open('https://www.google.com/search?q=rules+'+encodeURI($contestName), '_blank')
+      window.open(GOOGLE_SEARCH + encodeURI($contestName), '_blank')
     }
   }
 
@@ -94,6 +94,7 @@
 
 <!-- this is component HTML -->
 <div class="controls dialog" class:showDialog>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <h3>Contest Setup <img class="close" src="./check.svg" alt="X" on:click={closeDialog} title="click to save and close"></h3>
   <div class="panel basicPanel">
     <h4>Contest Name, Date</h4>
@@ -143,6 +144,8 @@
     </div>
   </div>
 
+<!-- svelte-ignore a11y-label-has-associated-control -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <label id="close-link" class="tiny right" on:click={closeDialog}>SAVE &amp; CLOSE</label>
 </div>
 

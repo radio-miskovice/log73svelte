@@ -3,11 +3,11 @@
   import Actions from './Actions.svelte'
   import Controls from './Controls.svelte'
   import Entry from './Entry.svelte'
-  import ErrorBar from './ErrorBar.svelte'
+  // import ErrorBar from './ErrorBar.svelte'
   import Header from './Header.svelte'
   import Hints from './Hints.svelte'
   import LogView from './LogView.svelte'
-import { xlink_attr } from 'svelte/internal'
+  // import { xlink_attr } from 'svelte/internal'
 </script>
 <main>
   <Header {version} />

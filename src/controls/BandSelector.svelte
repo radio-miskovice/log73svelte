@@ -23,14 +23,15 @@
 
   function checkOneBand(event) {
     const t = event.currentTarget;
-    if ($currentBand == t.id && !t.checked) {
+    if ($currentBand == t.id && !t.checked) $currentBand = "";
+    if( $currentBand == "" )
+    {
       for (const b of bands) {
         if (b.selected) {
           $currentBand = b.band.id;
           return;
         }
       }
-      $currentBand = "";
     }
   }
 
@@ -46,10 +47,12 @@
 
 <div class:showDialog class="dialog" title="Select bands">
   <h3>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <img class="close left" src="./check.svg" alt="X" on:click={closeDialog} title="click to save and close"> 
     Select bands to work on:
   </h3>
   <!-- svelte-ignore a11y-label-has-associated-control -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <label class="contest" on:click={setOnlyContestBands}
     >CLICK HERE: ONLY CONTESTING BANDS</label
   >
@@ -79,6 +82,7 @@
     {/each}
   </ul>
   <!-- svelte-ignore a11y-label-has-associated-control -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <label class="tiny" on:click={closeDialog}>SAVE &amp; CLOSE &gt;&gt</label>
 </div>
 

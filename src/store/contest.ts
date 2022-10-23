@@ -89,9 +89,13 @@ const lastUTCEnd = localStorage.getItem(CONTEST_END_DATE)
 const lastContestTemplateString = localStorage.getItem('contest.setup') || defaultTemplate
 const contestTemplate = JSON.parse(lastContestTemplateString)
 
+// these variables are necessary because writables value cannot be read :(
+
+let currentContestId ;
+
 export const contestId = writable<string>(lastContestId)
 export const contestIdLatest = writable<string>(lastContestIdLatest)
-
+// Contest configuration parameters
 export const hasRst    = writable(contestTemplate.hasRst)       // contest exchange includes RS/RST/RSQ etc.
 export const hasSerial = writable(contestTemplate.hasSerial)    // contest exchange includes serial number 
 export const hasGrid   = writable(contestTemplate.hasGrid)      // contest exchange includes WWLOC
@@ -107,17 +111,27 @@ export const exch2Label = writable<string>(contestTemplate.exch2Label)
 export const exch2Width = writable<number>(contestTemplate.exch2Width)
 export const contestName = writable<string>(lastContestName)
 export const contestNameExport = writable<string>(lastContestExpName)
-
+// constant exchanges
 export const exch1Sent = writable<string>(lastExch1Sent)
 export const exch2Sent = writable<string>(lastExch2Sent)
 
 export const startUtc = writable<Date>(lastUTCStart ? new Date(lastUTCStart) : undefined)
 export const endUtc   = writable<Date>(lastUTCEnd ? new Date(lastUTCEnd) : null )
 
+export const callsign = writable<string>('')
+export const rstR = writable<string>('')
+export const rstS = writable<string>('')
+export const serialR = writable<string>('')
+export const gridR = writable<string>('')
+export const exch1R  = writable<string>('')
+export const exch2R = writable<string>('')
+
 contestId.subscribe(value => {
   if( value ) localStorage.setItem(CONTEST_ID, value);
   else localStorage.removeItem(CONTEST_ID);
 })
+
+contestId.subscribe( value => { currentContestId = value });
 
 contestIdLatest.subscribe(value => {
   if( value ) localStorage.setItem(CONTEST_ID_LATEST, value);
@@ -131,7 +145,14 @@ hasExch1.subscribe(value => { contestTemplate.hasExch1 = value; localStorage.set
 hasExch2.subscribe(value => { contestTemplate.hasExch2 = value; localStorage.setItem('contest.setup', JSON.stringify(contestTemplate)) })
 
 hasSerialByBand.subscribe( value => localStorage.setItem( SERIAL_BY_BAND, value ? 'true' : 'false' ))
-serialNumber.subscribe( value => {if( value ) localStorage.setItem( SERIAL_NUMBER, value.toString())} )
+serialNumber.subscribe( value => {
+  if( value ) {
+    localStorage.setItem( SERIAL_NUMBER, value.toString());
+    if( currentContestId ) {
+      updateContest( currentContestId, { serial: value })
+    }
+  }
+})
 
 exch1Label.subscribe( value => { contestTemplate.exch1Label = value ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
 exch1Width.subscribe( value => { contestTemplate.exch1Width = value ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
@@ -140,6 +161,19 @@ exch2Width.subscribe( value => { contestTemplate.exch2Width = value ; localStora
 
 contestName.subscribe( value => localStorage.setItem('contest.name', value))
 contestNameExport.subscribe(value => localStorage.setItem('contest.name.export', value))
+
+// UPDATE contest record if necessary
+mywwloc.subscribe(wwlocUpdated => {
+  if (currentContestId != null && currentContestId != undefined) {
+    updateContest(currentContestId, { mywwloc: wwlocUpdated });
+  }
+})
+
+mycall.subscribe(mycallUpdated => {
+  if (currentContestId != null && currentContestId != undefined) {
+    updateContest(currentContestId, { mycall: mycallUpdated });
+  }
+})
 
 exch1Sent.subscribe(value => {
   if( value ) localStorage.setItem(CONTEST_EXCH1_SENT, value);

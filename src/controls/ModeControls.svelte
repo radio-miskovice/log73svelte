@@ -40,16 +40,23 @@ function openDialog() {
   li { display: block; margin: 0; padding: 2px   } */
   label.mode {  text-align: center ; color: silver; background: rgb(138, 16, 142) ; border-radius: 3px; width: 6ch; padding: 3px }
   label.mode.selected { color: white; font-weight: bold }
+  label.warning { background: yellow ; border-radius: 3px; padding: 1px; border: 1px solid black }
 </style>
 
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <div class="component">
-  <p class="tiny" on:click={openDialog}>SELECT MODES <svg class="icon"><use xlink:href="#icon-config" /></svg> </p>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <p class="tiny" on:click={openDialog}>CONFIGURE MODES <svg class="icon"><use xlink:href="#icon-config" /></svg> </p>
   <ul class="buttonPanel">
+    {#if $currentMode == ""}
+    <label class="warning">Configure at least one mode</label>
+    {/if}
     {#each modes as mode }
       {#if mode.selected }
-      <li><label class="mode" id={mode.id}
+      <li>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <label class="mode" id={mode.id}
         class:selected={mode.id === $currentMode}
         on:click={selectMode}>{mode.id}</label></li>
       {/if}

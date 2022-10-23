@@ -30,11 +30,16 @@
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
 <div class="component">
-  <p class="tiny" on:click={openDialog}>SELECT BANDS <svg class="icon"><use xlink:href="#icon-config" stroke="black" /></svg></p>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <p class="tiny" on:click={openDialog}>CONFIGURE BANDS <svg class="icon"><use xlink:href="#icon-config" stroke="black" /></svg></p>
   <ul class="buttonPanel">
+    {#if $currentBand == ""}
+    <label class="warning">Configure at least one band</label>
+    {/if}
     {#each bands as selectable}
       {#if selectable.selected}
         <li>
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
           <label
             class="band"
             id={selectable.band.id}
@@ -78,5 +83,6 @@
     color: white;
     font-weight: bold;
   }
+  label.warning { background: yellow ; border-radius: 3px; padding: 1px; border: 1px solid black }
 
 </style>

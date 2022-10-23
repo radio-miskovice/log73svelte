@@ -2,4 +2,4 @@
 
 const serial = navigator.serial ;
 
-export function systemHasSerial() { return navigator.serial !== undefined }
+export function systemHasSerial() { return serial !== undefined }

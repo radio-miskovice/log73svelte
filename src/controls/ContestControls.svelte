@@ -17,6 +17,7 @@
 
 <!-- this is component HTML -->
 <div class="contest">
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <p  on:click={openDialog}> 
     <span class:crossed={$contestId === null}>{$contestName}</span>
     <svg class="icon black"><use xlink:href="#icon-edit" /></svg>

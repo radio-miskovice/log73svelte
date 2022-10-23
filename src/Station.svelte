@@ -24,6 +24,7 @@
 </script>
 
 <div class:showDialog class="dialog">
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <h3>MY STATION<img class="close" src="./check.svg" alt="X" on:click={closeDialog} title="click to save and close"></h3>
   <p>My callsign:</p>
   <input
@@ -68,6 +69,7 @@
     on:keypress={closeOnEnter}
   />
 
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <p class="tiny right" on:click={closeDialog}>SAVE &amp; CLOSE &nbsp;</p>
 </div>
 

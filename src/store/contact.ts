@@ -40,6 +40,7 @@
 
 import { writable } from "svelte/store";
 import { db } from "./database";
+import { contestId } from "./contest" ;
 
 export interface IQso {
   id: string ; 
@@ -86,5 +87,10 @@ export function emptyQso() : IQso {
 }
 
 export const qsoLog = writable<IQso[]>( [] );
+
+contestId.subscribe( contestIdUpdated => {
+  let cid = contestIdUpdated || 'C' ;
+  db.log.where( { contestId : cid } ).sortBy('utcDateTime', qsoList => qsoLog.set( qsoList.reverse() )) ;
+});
 
 

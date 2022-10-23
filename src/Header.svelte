@@ -16,6 +16,7 @@
   <p>Contest Challenger V{version}</p>
   <p>
     {$mycall.toUpperCase()} in {$mywwloc.toUpperCase()}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <svg class="icon" on:click={toggleStationDialog}>
       <use xlink:href="#icon-edit" />
     </svg>
