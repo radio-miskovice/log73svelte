@@ -118,14 +118,6 @@ export const exch2Sent = writable<string>(lastExch2Sent)
 export const startUtc = writable<Date>(lastUTCStart ? new Date(lastUTCStart) : undefined)
 export const endUtc   = writable<Date>(lastUTCEnd ? new Date(lastUTCEnd) : null )
 
-export const callsign = writable<string>('')
-export const rstR = writable<string>('')
-export const rstS = writable<string>('')
-export const serialR = writable<string>('')
-export const gridR = writable<string>('')
-export const exch1R  = writable<string>('')
-export const exch2R = writable<string>('')
-
 contestId.subscribe(value => {
   if( value ) localStorage.setItem(CONTEST_ID, value);
   else localStorage.removeItem(CONTEST_ID);
@@ -227,35 +219,7 @@ export function updateContest(id: string, data: any ) {
   )
 }
 
-export function reloadContest( id: string ) {
-  console.log(`Would reactivate contest ${id} if exists in database`);
-  db.contest.get(id)
-    .then(  ( r ) => {
-      if( r ) {
-        contestId.set(r.id)
-        contestIdLatest.set(r.id)
-        contestName.set(r.name)
-        contestNameExport.set(r.nameExport || '')
-        exch1Label.set(r.exch1Label)
-        exch1Width.set(r.exch1Width)
-        exch1Sent.set(r.exch1Sent)
-        exch2Label.set(r.exch2Label)
-        exch2Width.set(r.exch2Width)
-        exch2Sent.set(r.exch2Sent)
-        hasExch1.set(r.hasExch1)
-        hasExch2.set(r.hasExch2)
-        hasGrid.set(r.hasGrid)
-        hasRst.set(r.hasRst)
-        hasSerial.set(r.hasSerial)
-        mycall.set(r.mycall)
-        mywwloc.set(r.mywwloc)
-        serialNumber.set(r.serial || 1)
-        startUtc.set( r.startDate )
-        if( r.dateClosed ) endUtc.set( r.dateClosed ) ;
-        else endUtc.set( null );
-      }
-      else {
-        errorMsg.set( 'Contest not found in database')
-      }
-  });
-}
+exch1Label.subscribe( exch1Label => { contestTemplate.exch1Label = exch1Label ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
+exch1Width.subscribe( exch1Width => { contestTemplate.exch1Width = exch1Width ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
+exch2Label.subscribe( exch2Label => { contestTemplate.exch2Label = exch2Label ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
+exch2Width.subscribe( exch2Width => { contestTemplate.exch2Width = exch2Width ; localStorage.setItem( 'contest.setup', JSON.stringify( contestTemplate )) } )
