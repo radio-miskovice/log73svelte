@@ -3,7 +3,7 @@
     hasExch1, hasExch2, hasGrid, hasRst, hasSerial, 
     exch1Label, exch1Width, exch2Label, exch2Width, 
     contestName, contestNameExport, exch1Sent, exch2Sent, 
-    activateContest, contestId, contestIdLatest, reloadContest, updateContest, } from "../store/contest";
+    activateContest, contestId, contestIdLatest, /* reloadContest, */ updateContest, } from "../store/contest";
   import { mycall, mywwloc } from "../store/station";
 
   export let showDialog: boolean;
